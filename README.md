@@ -10,9 +10,13 @@ The file location in db.migrations
 
 # How to run application
 Need JDK 11, Maven, Postgres
-mvn install
 
-# mvn spring-boot:run
+
+
+
+### mvn install
+
+###  mvn spring-boot:run
 
 
 
