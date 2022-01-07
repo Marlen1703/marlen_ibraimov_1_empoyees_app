@@ -38,9 +38,11 @@ public class EmployeeController {
                                  @RequestParam String department,
                                  @RequestParam String salary,
                                  @PathVariable Long id){
+
         if(name=="" || surname=="" || department=="" || salary==""){
             return "updateEmployee";
         }
+        System.out.println(salary);
         employeeService.updateEmployee(name,surname,department,salary,id);
         return "updateEmployee";
     }

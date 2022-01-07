@@ -34,7 +34,7 @@
     <div class="d-flex justify-content-between">
         <button  type="submit" class="btn btn-primary">Submit</button>
 
-        <a  onclick="window.history.go(-1); return false;">
+        <a  onclick="window.history.go(-2); return false;">
             <button  class="btn btn-primary">Back</button>
         </a>
     </div>
@@ -48,12 +48,12 @@
 <script>
     function validateForm() {
         const name = document.getElementById("name").value;
-        const surnmae=document.getElementById("surname").value;
+        const surname=document.getElementById("surname").value;
         if (name == "" || name == null) {
             alert("Name must be filled out");
             return false;
         }
-        if (surnmae == "" || surnmae == null) {
+        if (surname == "" || surname == null) {
             alert("surname must be filled out");
             return false;
         }

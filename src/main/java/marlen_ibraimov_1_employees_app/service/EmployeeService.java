@@ -8,9 +8,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 
 @Service
@@ -38,10 +35,8 @@ public class EmployeeService {
         employeeExist.get().setSalary(Integer.valueOf(salary));
         employeeRepository.save(employeeExist.get());
     }
-
     public Employee createEmployee(String name,String surname,String department,String salary){
         Employee employee=Employee.builder().
-                id(4L).
                 name(name).
                 surname(surname).
                 department(department).
