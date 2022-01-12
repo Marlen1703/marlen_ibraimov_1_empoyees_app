@@ -1,13 +1,18 @@
 package marlen_ibraimov_1_employees_app.service;
 
+import marlen_ibraimov_1_employees_app.dto.EmployeeDto;
 import marlen_ibraimov_1_employees_app.entity.Employee;
 import marlen_ibraimov_1_employees_app.repository.EmployeeRepository;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Type;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -15,33 +20,25 @@ public class EmployeeService {
     @Autowired
     EmployeeRepository employeeRepository;
 
-    public Page<Employee> getAllEmployees(int page,int size){
+    @Autowired
+    ModelMapper mapper;
+
+    public Page<EmployeeDto> getAllEmployees(int page, int size){
         Pageable firstPageWithTenElements = PageRequest.of(page, size);
-        Page <Employee> employeePage=employeeRepository.findAll(firstPageWithTenElements);
-        return employeePage;
+        Page<EmployeeDto> employeeDtos=employeeRepository.findAll(firstPageWithTenElements).map(EmployeeDto::new);
+        return employeeDtos;
     }
 
-    public Optional<Employee> deleteEmployeeById(Long id){
+    public void updateEmployee(EmployeeDto employeeDto,long id){
         Optional<Employee> employeeExist=employeeRepository.findById(id);
-        employeeRepository.delete(employeeExist.get());
-        return employeeExist;
-    }
-
-    public void updateEmployee(String name, String surname, String department, String salary, Long id){
-        Optional<Employee> employeeExist=employeeRepository.findById(id);
-        employeeExist.get().setName(name);
-        employeeExist.get().setSurname(surname);
-        employeeExist.get().setDepartment(department);
-        employeeExist.get().setSalary(Integer.valueOf(salary));
+        employeeExist.get().setName(employeeDto.getName());
+        employeeExist.get().setSurname(employeeDto.getSurname());
+        employeeExist.get().setDepartment(employeeDto.getDepartment());
+        employeeExist.get().setSalary(Integer.valueOf(employeeDto.getSalary()));
         employeeRepository.save(employeeExist.get());
     }
-    public Employee createEmployee(String name,String surname,String department,String salary){
-        Employee employee=Employee.builder().
-                name(name).
-                surname(surname).
-                department(department).
-                salary(Integer.valueOf(salary)).
-                build();
+    public Employee createEmployee(EmployeeDto employeeDto){
+        Employee employee=mapper.map(employeeDto,Employee.class);
         employeeRepository.save(employee);
         return employee;
     }

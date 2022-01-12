@@ -1,0 +1,2 @@
+ALTER TABLE if exists employees
+    ADD TIMESTAMP timestamp  DEFAULT CURRENT_TIMESTAMP;
