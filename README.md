@@ -1,5 +1,5 @@
 # marlen_ibraimov_1_employees_app
-Task by Timelysoft
+Task by FriendlySoft
 
 :heavy_check_mark: Приложение по принципу построения MVC архитектуры.
 
